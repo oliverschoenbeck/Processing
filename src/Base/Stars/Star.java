@@ -1,4 +1,4 @@
-package Base.Elements;
+package Base.Stars;
 
 import Base.ProcessingObject;
 import processing.core.PApplet;
@@ -21,7 +21,7 @@ public class Star extends ProcessingObject {
     public void simulate() {
         boolean reset = false;
         previousPosition = position.copy();
-        position.z = position.z - 30;
+        position.z = position.z - 10;
         if (position.z < 1){
             position.z = maximumZ;
             reset = true;
@@ -36,9 +36,9 @@ public class Star extends ProcessingObject {
 
     public void render(){
         float r = map(position.z, 0, maximumZ, 16,0);
-
-
+        float alpha = map(position.z, 0, maximumZ, 255,0);
+        stroke(255, alpha);
         canvas.line(previousPosition.x, previousPosition.y, position.x, position.y);
-        //canvas.ellipse(position.x, position.y, r, r);
+        // canvas.ellipse(position.x, position.y, r, r);
     }
 }

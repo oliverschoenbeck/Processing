@@ -1,6 +1,6 @@
-package Base.Systems;
+package Base.Stars;
 
-import Base.Elements.Star;
+import Base.Stars.Star;
 import Base.ProcessingObject;
 import processing.core.PApplet;
 

@@ -3,7 +3,9 @@ package Base;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public abstract class ProcessingObject {
+import java.util.ArrayList;
+
+public abstract class ProcessingObject implements IDrawable {
 
     protected PApplet canvas;
     protected PVector position;
@@ -24,14 +26,11 @@ public abstract class ProcessingObject {
 
     public abstract void render();
 
-
-
     // Helper for canvas functions
 
     public int width(){
         return canvas.width;
     }
-
     public int height(){
         return canvas.height;
     }
@@ -39,7 +38,6 @@ public abstract class ProcessingObject {
     public float random(float high){
         return canvas.random(high);
     }
-
     public float random(float low, float high){
         return canvas.random(low, high);
     }
@@ -47,7 +45,6 @@ public abstract class ProcessingObject {
     public void translate(float x, float y){
         canvas.translate(x, y);
     }
-
     public void translate(float x, float y, float z){
         canvas.translate(x, y, z);
     }

@@ -1,22 +1,31 @@
-import Base.Systems.StarField;
+import Base.IDrawable;
+import Base.Particles.ParticleSystem;
+import Base.Particles.RandomParticleFactory;
+import Base.Particles.XYParticleFactory;
 import processing.core.PApplet;
 
 public class MainSketch extends PApplet {
 
-    private StarField starField;
+    private IDrawable drawable;
 
     @Override
     public void settings() {
-        size(800,800);
-        // fullScreen();
+         //size(800,800);
+         fullScreen();
+    }
 
-        starField = new StarField(this, 500);
+    @Override
+    public void setup() {
+        drawable = new ParticleSystem(this, new XYParticleFactory(this, 1000, 0, 0));
     }
 
     @Override
     public void draw() {
         background(0);
-        starField.draw();
+        pushMatrix();
+        translate(width / 2, height / 2);
+        drawable.draw();
+        popMatrix();
     }
 
     public static void main(String[] args){
