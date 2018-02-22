@@ -1,29 +1,22 @@
+import Base.Systems.StarField;
 import processing.core.PApplet;
 
 public class MainSketch extends PApplet {
 
-    public static final int MAX_STARS = 800;
-
-    public Star[] planets = new Star[MAX_STARS];
+    private StarField starField;
 
     @Override
     public void settings() {
         size(800,800);
         // fullScreen();
 
-
-        for (int i = 0; i < MAX_STARS; i++){
-            planets[i] = new Star(this, random(-width, width), random(-height, height), width);
-        }
+        starField = new StarField(this, 500);
     }
 
     @Override
     public void draw() {
         background(0);
-        translate(width / 2, height / 2);
-        for (int i = 0; i < MAX_STARS; i++){
-            planets[i].draw();
-        }
+        starField.draw();
     }
 
     public static void main(String[] args){
