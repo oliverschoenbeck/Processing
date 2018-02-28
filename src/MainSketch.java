@@ -22,23 +22,22 @@ public class MainSketch extends PApplet {
     public void setup() {
         //drawable = new ParticleSystem(this, new XYParticleFactory(this, 1000, 0, 0));
         s = new LSystem(this);
+        for (int i = 0; i < 2; i++){
+            s.mutate();
+        }
+        System.out.println("CALC DONE");
         s.render();
+        System.out.println("RENDER DONE");
     }
 
     @Override
     public void mousePressed(MouseEvent event) {
-        s.mutate();
+
     }
 
     @Override
     public void draw() {
-        // background(0);
 
-
-        //pushMatrix();
-        //translate(width / 2, height / 2);
-        //drawable.draw();
-        //popMatrix();
     }
 
     public static void main(String[] args){
