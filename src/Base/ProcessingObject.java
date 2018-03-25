@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public abstract class ProcessingObject implements IDrawable {
 
-    protected PApplet canvas;
-    protected PVector position;
+    public PApplet canvas;
+    public PVector position;
 
     public ProcessingObject(PApplet canvas, float x, float y, float z){
         this.canvas = canvas;
@@ -70,5 +70,18 @@ public abstract class ProcessingObject implements IDrawable {
     }
     public void stroke(float r, float g, float b, float alpha){
         canvas.stroke(r, g, b, alpha);
+    }
+
+
+    public float sin(float angle){
+        return canvas.sin(angle);
+    }
+
+    public float cos(float angle){
+        return canvas.cos(angle);
+    }
+
+    public float tan(float angle){
+        return canvas.tan(angle);
     }
 }

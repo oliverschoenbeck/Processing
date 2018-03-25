@@ -1,43 +1,41 @@
-import Base.IDrawable;
+import Base.Flocking.Boids;
+import Base.Knots.Knot;
 import Base.LSystem;
-import Base.Particles.ParticleSystem;
-import Base.Particles.RandomParticleFactory;
-import Base.Particles.XYParticleFactory;
+import Base.Pendulums.Pendulum;
 import processing.core.PApplet;
+import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 public class MainSketch extends PApplet {
 
-    private IDrawable drawable;
-
-    private LSystem s;
+    private Boids boids;
 
     @Override
     public void settings() {
-         size(800,800);
-         //fullScreen();
+         size(800,800, P2D);
+         boids = new Boids(this);
+         // boids.createWalls();
     }
 
     @Override
     public void setup() {
-        //drawable = new ParticleSystem(this, new XYParticleFactory(this, 1000, 0, 0));
-        s = new LSystem(this);
-        for (int i = 0; i < 2; i++){
-            s.mutate();
-        }
-        System.out.println("CALC DONE");
-        s.render();
-        System.out.println("RENDER DONE");
-    }
-
-    @Override
-    public void mousePressed(MouseEvent event) {
-
+        colorMode(HSB);
+        background(0);
     }
 
     @Override
     public void draw() {
+        boids.draw();
+    }
 
+    @Override
+    public void mouseClicked() {
+        boids.createBoids();
+    }
+
+    @Override
+    public void keyPressed(KeyEvent event) {
+        boids.keyPressed(event);
     }
 
     public static void main(String[] args){

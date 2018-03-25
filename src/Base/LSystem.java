@@ -1,26 +1,28 @@
 package Base;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 import java.util.ArrayList;
 
 public class LSystem {
 
-    private String axiom = "0";
+    private String axiom = "X";
     private String sentence = axiom;
 
     private ArrayList<LSystemRule> rules;
     private PApplet canvas;
-    private float initialLen = 500;
+    private float initialLen = 300;
     private float len = initialLen;
     private float deg = 25.0f;// = canvas.random(10, 15);
 
     public LSystem(PApplet canvas){
         this.canvas = canvas;
         rules = new ArrayList<>();
-        rules.add(new LSystemRule('0', "1[0]01[0]0"));
-        rules.add(new LSystemRule('1', "11"));
-        //rules.add(new LSystemRule('F', "FF+F+F+F+F+F-F"));
+        // rules.add(new LSystemRule('0', "1[0]01[0]0"));
+        // rules.add(new LSystemRule('1', "11"));
+        rules.add(new LSystemRule('X', "F[-X][X]F[-X]+FX"));
+        rules.add(new LSystemRule('F', "FF"));
     }
 
     public void mutate(){
@@ -39,11 +41,13 @@ public class LSystem {
                 nextSentence.append(sentence.charAt(i));
         }
         sentence = nextSentence.toString();
+
+        System.out.println(sentence);
     }
 
     public void render() {
         canvas.background(0);
-        canvas.resetMatrix();
+        //canvas.resetMatrix();
         canvas.translate(canvas.width / 2, canvas.height);
         canvas.stroke(255);
 
@@ -51,24 +55,25 @@ public class LSystem {
         Character lastOp;
         for (int i = 0; i < sentence.length(); i++){
             Character c = sentence.charAt(i);
-            if (c == '0'){
+            if (c == 'F'){
                 canvas.stroke(255);
-                canvas.line(0,0,0, -len);
+                canvas.line(0,0, 0, -len);
                 canvas.translate(0, -len);
-                canvas.stroke(255, 0, 0);
-                for (int f = 0; f < 5; f++){
-                    canvas.point(canvas.random(-1,1),canvas.random(-1,1));
-                }
-            } else if (c == '1'){
-                canvas.stroke(255);
-                canvas.line(0,0,0, -len);
-                canvas.translate(0, -len);
+
             } else if (c == '[') {
                 canvas.pushMatrix();
-                canvas.rotate(canvas.radians(-deg));
+
             } else if (c == ']') {
                 canvas.popMatrix();
-                canvas.rotate(canvas.radians(deg));
+
+            } else if (c == '+') {
+                float val = canvas.radians(deg) * -1;
+                canvas.rotate(val);
+
+            } else if (c == '-') {
+                float val = canvas.radians(deg);
+                canvas.rotate(val);
+
             }
         }
     }
